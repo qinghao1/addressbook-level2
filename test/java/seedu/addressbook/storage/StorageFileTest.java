@@ -25,7 +25,7 @@ import static seedu.addressbook.util.TestUtil.assertFileDoesNotExist;
 
 public class StorageFileTest {
     private static final String TEST_DATA_FOLDER = "test/data/StorageFileTest";
-    private static final String NON_EXISTANT_FILE_NAME = "ThisFileDoesNotExist.xml";
+    private static final String NON_EXISTENT_FILE_NAME = "ThisFileDoesNotExist.xml";
 
     @Rule
     public ExpectedException thrown = ExpectedException.none();
@@ -65,13 +65,13 @@ public class StorageFileTest {
 
     @Test
     public void load_nonExistantFile_returnsEmptyAddressBook() throws Exception {
-        AddressBook actualAB = getStorage(NON_EXISTANT_FILE_NAME).load();
+        AddressBook actualAB = getStorage(NON_EXISTENT_FILE_NAME).load();
         AddressBook expectedAB = new AddressBook();
 
         assertEquals(actualAB, expectedAB);
 
         // verify that loading does not result in the file being created
-        assertFileDoesNotExist(TEST_DATA_FOLDER + "/" + NON_EXISTANT_FILE_NAME);
+        assertFileDoesNotExist(TEST_DATA_FOLDER + "/" + NON_EXISTENT_FILE_NAME);
     }
 
     @Test
@@ -86,7 +86,6 @@ public class StorageFileTest {
         AddressBook ab = getTestAddressBook();
         StorageFile storage = getTempStorage();
         storage.save(ab);
-
         assertStorageFilesEqual(storage, getStorage("ValidData.xml"));
     }
 
@@ -110,15 +109,15 @@ public class StorageFileTest {
     private AddressBook getTestAddressBook() throws Exception {
         AddressBook ab = new AddressBook();
         ab.addPerson(new Person(new Name("John Doe"),
-                                new Phone("98765432", false),
-                                new Email("johnd@gmail.com", false),
-                                new Address("John street, block 123, #01-01", false),
-                                new UniqueTagList(Collections.emptySet())));
+                new Phone("98765432", false),
+                new Email("johnd@gmail.com", false),
+                new Address("123, Clementi Ave 3, #12-34, 231534", false),
+                new UniqueTagList(Collections.emptySet())));
         ab.addPerson(new Person(new Name("Betsy Crowe"),
-                                new Phone("1234567", true),
-                                new Email("betsycrowe@gmail.com", false),
-                                new Address("Newgate Prison", true),
-                                new UniqueTagList(new Tag("friend"), new Tag("criminal"))));
+                new Phone("1234567", true),
+                new Email("betsycrowe@gmail.com", false),
+                new Address("123, Newgate Prison, #23-45, 324678", true),
+                new UniqueTagList(new Tag("friend"), new Tag("criminal"))));
         return ab;
     }
 }
