@@ -14,8 +14,21 @@ import seedu.addressbook.data.person.address.PostalCode;
 public class Address {
 
     public static final String EXAMPLE = "123, some street";
-    public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses can be in any format";
-    public static final String ADDRESS_VALIDATION_REGEX = ".+";
+    public static final String MESSAGE_ADDRESS_CONSTRAINTS = "Person addresses should be in the format of: " +
+            "'a/BLOCK, STREET, UNIT, POSTAL_CODE'";
+    public static final String ADDRESS_VALIDATION_REGEX = "(.+),(.+),(.+),(.+)";
+
+    private static final String ADDRESS_SPLIT_DELIMITER = ",";
+
+    private static final Integer BLOCK_INDEX = 0;
+    private static final Integer STREET_INDEX = 1;
+    private static final Integer UNIT_INDEX = 2;
+    private static final Integer POSTALCODE_INDEX = 3;
+
+    private final Block block;
+    private final Street street;
+    private final Unit unit;
+    private final PostalCode postalCode;
 
     public final String value;
     private boolean isPrivate;
@@ -32,6 +45,14 @@ public class Address {
             throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
         }
         this.value = trimmedAddress;
+        String[] splitAddress = trimmedAddress.split(ADDRESS_SPLIT_DELIMITER);
+        if (splitAddress.length < 4) { //Sanity check
+            throw new IllegalValueException(MESSAGE_ADDRESS_CONSTRAINTS);
+        }
+        this.block = new Block(splitAddress[BLOCK_INDEX].trim());
+        this.street = new Street(splitAddress[STREET_INDEX].trim());
+        this.unit = new Unit(splitAddress[UNIT_INDEX].trim());
+        this.postalCode = new PostalCode(splitAddress[POSTALCODE_INDEX].trim());
     }
 
     /**
@@ -43,7 +64,11 @@ public class Address {
 
     @Override
     public String toString() {
-        return value;
+        return String.format("%s, %s, %s, %s",
+                block.toString(),
+                street.toString(),
+                unit.toString(),
+                postalCode.toString());
     }
 
     @Override
@@ -55,7 +80,7 @@ public class Address {
 
     @Override
     public int hashCode() {
-        return value.hashCode();
+        return this.toString().hashCode();
     }
 
     public boolean isPrivate() {
