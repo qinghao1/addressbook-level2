@@ -2,6 +2,11 @@ package seedu.addressbook.data.person;
 
 import seedu.addressbook.data.exception.IllegalValueException;
 
+import seedu.addressbook.data.person.address.Block;
+import seedu.addressbook.data.person.address.Street;
+import seedu.addressbook.data.person.address.Unit;
+import seedu.addressbook.data.person.address.PostalCode;
+
 /**
  * Represents a Person's address in the address book.
  * Guarantees: immutable; is valid as declared in {@link #isValidAddress(String)}
