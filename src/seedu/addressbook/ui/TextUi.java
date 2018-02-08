@@ -5,6 +5,7 @@ import static seedu.addressbook.common.Messages.MESSAGE_INIT_FAILED;
 import static seedu.addressbook.common.Messages.MESSAGE_PROGRAM_LAUNCH_ARGS_USAGE;
 import static seedu.addressbook.common.Messages.MESSAGE_USING_STORAGE_FILE;
 import static seedu.addressbook.common.Messages.MESSAGE_WELCOME;
+import static seedu.addressbook.common.Messages.MESSAGE_STORAGE_READ_ONLY;
 
 import java.io.InputStream;
 import java.io.PrintStream;
@@ -108,6 +109,9 @@ public class TextUi {
         showToUser(MESSAGE_GOODBYE, DIVIDER, DIVIDER);
     }
 
+    public void showStorageReadOnlyMessage() {
+        showToUser(MESSAGE_STORAGE_READ_ONLY, DIVIDER, DIVIDER);
+    }
 
     public void showInitFailedMessage() {
         showToUser(MESSAGE_INIT_FAILED, DIVIDER, DIVIDER);
