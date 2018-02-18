@@ -28,8 +28,8 @@ public class Contact {
     @Override
     public boolean equals(Object other) {
         return other == this // short circuit if same object
-                || (other instanceof Address // instanceof handles nulls
-                && this.value.equals(((Address) other).value)); // state check
+                || (other instanceof Contact // instanceof handles nulls
+                && this.value.equals(((Contact) other).value)); // state check
     }
 
     @Override
