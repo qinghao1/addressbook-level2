@@ -6,8 +6,8 @@ package seedu.addressbook.data.person;
 
 public class Contact {
 
-    private String value;
-    private boolean isPrivate;
+    protected String value;
+    protected boolean isPrivate;
 
     public Contact(boolean isPrivate) {
         this.isPrivate = isPrivate;
