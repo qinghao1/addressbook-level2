@@ -42,7 +42,7 @@ public class UtilsTest {
         assertNoNull();
 
         //One null
-        assertAnyNull(null);
+        assertAnyNull((Object) null);
 
         //One non-null
         assertNoNull(123);
